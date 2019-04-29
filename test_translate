@@ -1,0 +1,38 @@
+# Imports the Google Cloud client library
+from google.cloud import translate
+
+# Instantiates a client
+translate_client = translate.Client()
+text = ""
+while 1:
+    # The text to translate
+    if text == "":
+        text = input("Enter word or phrase to translate: ")
+    # The target language
+
+    res = input("Display available languages? (y/n)")
+    if res == 'y' or res == 'yes' or res == 'Yes' or res == 'Y':
+        print("Languages available are:\n")
+        results = translate_client.get_languages()
+        for language in results:
+            print(u'{name} ({language})'.format(**language))
+
+    target = input("Enter language for output (abbreviation)")
+
+    # Translates some text into target language
+    translation = translate_client.translate(
+        text,
+        target_language=target)
+
+    print(u'Text: {}'.format(text))
+    print(u'Translation: {}'.format(translation['translatedText']))
+    print("\n=========================================================\n")
+    print("                       Option Menu\n                       ")
+    option = int(input("To try a different language: enter 1\nTo restart: enter 2\nTo quit: enter 3\n"))
+    if option == 1:
+        continue
+    if option == 2:
+        text = ""
+        continue
+    else:
+        break

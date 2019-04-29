@@ -1,0 +1,11 @@
+# Imports the Google Cloud client library
+from google.cloud import translate
+
+# Instantiates a client
+translate_client = translate.Client()
+res = translate_client.get_languages()
+l = []
+for x in res:
+    l.append((x['name'], x['language']))
+print (l)
+
