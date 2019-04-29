@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IMAGE</title>
+</head>
+<body>
+	
+	<h1>Image</h1>
+   
+     
+    <p>Search word: {{text}}</p>
+      
+          
+    <p>Language chosen: {{lang1}}</p>
+
+     {% for l in Languages %}
+    <p>>{{ l[1] }}</p>
+    {% endfor %}
+
+    <p>{{lang1[1]}}</p>
+
+    <p>{{text[1]}}</p>
+  	
+</body>
+</html>

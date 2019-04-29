@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	<h1>Image Search</h1>
+
+	<form action="/results" method="POST">
+    <input type="text" name="lang" placeholder="Search..">
+   
+  
+    <select name="Language">
+  	<option selected="selected" value="secret">Language</option>
+    {% for l in Languages %}
+    <option value="{{ l[0]}}">{{ l[0] }}</option>
+    {% endfor %}
+   </select>
+
+    <br><br>
+    <input type="submit" value="Search" name="sub">
+  </form>
+
+</body>
+</html>
