@@ -7,15 +7,18 @@ import ssl
 
 #makes class
 class imageSearch():
-    def __init__(self, kw, start = -1, end = -1):
+    #start and end are optional parameters
+    #make save = w to write scaped html files
+    def __init__(self, kw, save = '', start = -1, end = -1):
         self.tnlink_list = []
         self.wblink_list = []
         self.keyword = kw
         self.site = f'https://www.google.com/search?tbm=isch&q={self.keyword}'
+        self.save = save
         self.declareSSL()
         #checks to see if user entered range
         if start >= 0 and end > 0:
-            searchRange(start, end)
+            self.searchRange(start, end)
 
     #add this to bypass ssl error
     def declareSSL(self):
@@ -24,37 +27,16 @@ class imageSearch():
         self.ctx.verify_mode = ssl.CERT_NONE
 
     #opens new website (most likely next page in searches)
-    def openSearch(self, save = ''):
+    def openSearch(self):
         req = Request(self.site, headers={'User-Agent': 'Chrome'})
         resp = urlopen(req, context = self.ctx)
         self.bs_obj = BeautifulSoup(resp.read(), features='lxml')
         #writes to a file for troubleshooting
-        if save == 'w':
+        if self.save == 'w':
             txt_file = open(f'scrape{self.page}.html', 'w')
             txt_file.write(self.bs_obj.prettify())
             txt_file.close()
         self.page += 1
-
-    #changes keyword
-    def changeKeyword(self, kw):
-        self.keyword = kw
-        self.site = f'https://www.google.com/search?tbm=isch&q={self.keyword}'
-
-    #searches user specified range
-    def searchRange(self, start, end):
-        self.start = start
-        self.end = end
-        self.page = int(start/20) + 1
-        self.site += f'&start={int(self.start/20)*20}'
-        self.openSearch()
-        self.getLinks()
-        temp_start = self.start
-        if start != 0:
-            while temp_start > 20:
-                temp_start -= 20
-            for spot in range(temp_start):
-                del self.tnlink_list[spot]
-                del self.wblink_list[spot]
 
     #goes to next page during search
     def nextPage(self):
@@ -91,8 +73,31 @@ class imageSearch():
             elif added == 20:
                 return
 
+    #changes keyword
+    def changeKeyword(self, kw):
+        self.keyword = kw
+        self.site = f'https://www.google.com/search?tbm=isch&q={self.keyword}'
+
+    #searches user specified range
+    def searchRange(self, start, end):
+        self.start = start
+        self.end = end
+        self.page = int(start/20) + 1
+        self.site += f'&start={int(self.start/20)*20}'
+        self.openSearch()
+        self.getLinks()
+        temp_start = self.start
+        if start != 0:
+            while temp_start > 20:
+                temp_start -= 20
+            for spot in range(temp_start):
+                del self.tnlink_list[spot]
+                del self.wblink_list[spot]
+
+    #passes thumbnail list
     def getTnList(self):
         return self.tnlink_list
 
+    #passes redirect list
     def getWbList(self):
         return self.wblink_list
