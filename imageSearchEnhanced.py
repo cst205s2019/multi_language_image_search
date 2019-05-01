@@ -1,5 +1,5 @@
 """Currently only gets first 100 results"""
-"""Pass same number 2 times for start and end if only one result"""
+"""Pass same number 2 times for start and end if only one result except for first image, 0, 1 is valid to get only first"""
 #imported for opening url
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
@@ -56,7 +56,6 @@ class imageSearch():
         #loops through all boxes with info
         for item in self.bs_obj.findAll('div', attrs={'class': 'rg_meta notranslate'}):
             #looks for links to websites that image is on and adds them to list
-            print(count)
             if self.start == self.end and count == self.end:
                 self.link_list.append(re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', item.text))
                 return
