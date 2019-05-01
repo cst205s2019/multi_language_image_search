@@ -1,3 +1,5 @@
+"""Currently only gets first 100 results"""
+"""Pass same number 2 times for start and end if only one result"""
 #imported for opening url
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
@@ -6,14 +8,13 @@ from bs4 import BeautifulSoup
 import ssl
 
 import os
-
+import re
 #makes class
 class imageSearch():
     #start and end are optional parameters
     #make save = w to write scaped html files
     def __init__(self, kw, save = '', start = -1, end = -1):
-        self.tnlink_list = []
-        self.wblink_list = []
+        self.link_list = []
         self.keyword = kw
         self.site = f'https://www.google.com/search?tbm=isch&q={self.keyword}'
         self.save = save
@@ -30,7 +31,8 @@ class imageSearch():
 
     #opens new website (most likely next page in searches)
     def openSearch(self):
-        req = Request(self.site, headers={'User-Agent': 'Chrome'})
+        req = Request(self.site, headers={'User-Agent': 'Chrome/11.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0'})
+        # req = Request(self.site, headers={'User-Agent': 'Chrome'})
         resp = urlopen(req, context = self.ctx)
         self.bs_obj = BeautifulSoup(resp.read(), features='lxml')
         #writes to a file for troubleshooting
@@ -39,45 +41,32 @@ class imageSearch():
                 os.mkdir('HTML Scrape Pages')
             except:
                 print('Failed to make dir')
-            txt_file = open(f'HTML Scrape Pages/scrape{self.page}.html', 'w')
+            txt_file = open(f'HTML Scrape Pages/scrape.html', 'w')
             txt_file.write(self.bs_obj.prettify())
             txt_file.close()
-        self.page += 1
 
     #goes to next page during search
     def nextPage(self):
-        self.site = f'https://www.google.com/search?tbm=isch&q={self.keyword}&start={self.page*20}'
+        self.site = f'https://www.google.com/search?tbm=isch&q={self.keyword}'
         self.openSearch()
 
     #gets links to thumbnails and websites
     def getLinks(self):
-        added = 0
+        count = 0
         #loops through all boxes with info
-        for item in self.bs_obj.findAll('td'):
+        for item in self.bs_obj.findAll('div', attrs={'class': 'rg_meta notranslate'}):
             #looks for links to websites that image is on and adds them to list
-            for link in item.findAll('a'):
-                if 'url?q=' in link['href']:
-                    wblink = link['href']
-                    wblink = wblink.replace('/url?q=', '')
-                    wblink = wblink[:wblink.find('&sa=')]
-                    self.wblink_list.append(wblink)
-                    added += 1
-                if len(self.wblink_list) == (self.end - (int(self.start/20)*20)):
-                    break
-            #adds thumbnail to list
-            for tn in item.findAll('img'):
-                self.tnlink_list.append(tn['src'])
-                if len(self.tnlink_list) == (self.end - (int(self.start/20)*20)):
-                    return
-
-            #stops duplicates
-            if added == 20 and len(self.tnlink_list) < (self.end - (int(self.start/20)*20)):
-                self.nextPage()
-                self.getLinks()
+            print(count)
+            if self.start == self.end and count == self.end:
+                self.link_list.append(re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', item.text))
                 return
-
-            elif added == 20:
+            elif count < self.start:
+                count += 1
+            elif count == self.end:
                 return
+            else:
+                self.link_list.append(re.findall('http[s]?://(?:[a-zA-Z]|[0-9]|[$-_@.&+]|[!*\(\),]|(?:%[0-9a-fA-F][0-9a-fA-F]))+', item.text))
+                count += 1
 
     #changes keyword
     def changeKeyword(self, kw):
@@ -88,22 +77,9 @@ class imageSearch():
     def searchRange(self, start, end):
         self.start = start
         self.end = end
-        self.page = int(start/20) + 1
-        self.site += f'&start={int(self.start/20)*20}'
         self.openSearch()
         self.getLinks()
-        temp_start = self.start
-        if start != 0:
-            while temp_start > 20:
-                temp_start -= 20
-            for spot in range(temp_start):
-                del self.tnlink_list[spot]
-                del self.wblink_list[spot]
 
     #passes thumbnail list
-    def getTnList(self):
-        return self.tnlink_list
-
-    #passes redirect list
-    def getWbList(self):
-        return self.wblink_list
+    def getLinkList(self):
+        return self.link_list
