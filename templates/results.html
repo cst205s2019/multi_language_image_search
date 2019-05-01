@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>IMAGE</title>
+    <title>IMAGE</title>
 </head>
 <body>
-	
-	<h1>Image</h1>
-   
-     
-    <p>Search word: {{text}}</p>
-      
-          
-    <p>Language chosen: {{lang1}}</p>
 
-     {% for l in Languages %}
-    <p>>{{ l[1] }}</p>
-    {% endfor %}
+    <h1>Image</h1>
 
-    <p>{{lang1[1]}}</p>
 
-    <p>{{text[1]}}</p>
-  	
+    <p>
+        Search word: {{text}}
+    </p>
+    <p>
+        Language chosen: {{lang1}}
+    </p>
+
+    <p>
+        Translation Result: {{translated}}
+    </p>
+    <!-- {% for l in Languages %}
+        <p>>{{ l[1] }}</p>
+    {% endfor %} -->
+
 </body>
 </html>
