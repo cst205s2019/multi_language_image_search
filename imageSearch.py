@@ -1,3 +1,6 @@
+"""DO NOT USE"""
+"""USE ENHANCED VERSION FOR BETTER RESULTS"""
+
 #imported for opening url
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
