@@ -2,7 +2,7 @@ import imageSearchEnhanced as imageSearch
 
 keyword = 'ocean'
 # to write html
-search = imageSearch.imageSearch(keyword, 'w', 0, 1)
+search = imageSearch.imageSearch(keyword, '', 0, 5)
 
 # to not write html and include range in init
 # search = imageSearch.imageSearch(keyword, '', 0, 5)
