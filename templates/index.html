@@ -12,15 +12,14 @@
 
     <form action="/results" method="POST">
         <input type="text" id="text" name="lang" placeholder="Search..">
-	<input type="submit" id="submit" value="Search" name="sub">
-	<br></br>
         <select name="Language">
             <option selected="selected" value="secret">Language</option>
             {% for l in Languages %}
                 <option value="{{ l[0]}}">{{ l[0] }}</option>
             {% endfor %}
         </select>
-
+	
+	<input type="submit" id="submit" value="Search" name="sub">
     </form>
 
 </body>
