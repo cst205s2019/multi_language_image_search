@@ -12,15 +12,17 @@
         Search Phrase: {{text}}
     </p>
     <p>
-        Language chosen: {{lang1}}
+        Language Chosen: {{lang1}}
     </p>
 
     <p>
         Translation Result: {{translated}}
     </p>
-    <!-- {% for l in Languages %}
-        <p>>{{ l[1] }}</p>
-    {% endfor %} -->
+    <select name="Language">
+	<option selected="selected" value="secret">Language</option>
+        {% for l in Languages %}
+	    <option value="{{ l[0] }}">{{ l[0] }}</option>
+        {% endfor %}
 
 </body>
 </html>
