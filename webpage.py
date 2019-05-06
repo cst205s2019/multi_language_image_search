@@ -6,7 +6,6 @@ from functions import *
 
 app = Flask(__name__)
 
-## List of Languages
 
 @app.route("/")
 def hello():
@@ -17,7 +16,12 @@ def result():
 	if request.method == 'POST':
 		text = request.form['lang']
 		lang1 = request.form['Language']
-		translated = custom_convert(text, lang1)
+		res = ""
+		for x in Languages:
+			if x[0] == lang1:
+				res = x[1]
+				break
+		translated = custom_convert(text, res)
 
 	return render_template('results.html', text=text, lang1=lang1, translated=translated, Languages=Languages)
 
