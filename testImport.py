@@ -1,7 +1,11 @@
+"""EXAMPLE OF HOW TO IMPORT AND RUN THE IMAGE SEARCH CLASS"""
+
+#imageSearchEnhanced.py must be in the same file for this line to work and import correctly
 import imageSearchEnhanced as imageSearch
 
 keyword = 'ocean'
 # to write html
+# put this line and the import line into whatever program you are tryig to integrate into to get the program to work
 search = imageSearch.imageSearch(keyword, '', 0, 5)
 
 # to not write html and include range in init
