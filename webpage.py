@@ -4,6 +4,8 @@ from jinja2 import Template
 from language_list import Languages
 from functions import *
 
+import imageSearchEnhanced as imageSearch
+
 app = Flask(__name__)
 
 
@@ -26,7 +28,9 @@ def result():
             res = 'en'
             lang1 = "English"
         translated = custom_convert(text, res)
-    return render_template('results.html', text=text, lang1=lang1, translated=translated, Languages=Languages)
+        images = imageSearch.imageSearch(translated, '', 0, 100)
+        imageList = images.getLinkList()
+    return render_template('results.html', text=text, lang1=lang1, translated=translated, Languages=Languages, imageList=imageList)
 
 
 

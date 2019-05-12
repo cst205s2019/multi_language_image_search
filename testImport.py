@@ -7,7 +7,7 @@ import imageSearchEnhanced as imageSearch
 keyword = u'海'
 # to write html
 # put this line and the import line into whatever program you are tryig to integrate into to get the program to work
-search = imageSearch.imageSearch(keyword, '', 0, 5)
+search = imageSearch.imageSearch(keyword, '', 0, 100)
 
 # to not write html and include range in init
 # search = imageSearch.imageSearch(keyword, '', 0, 5)
