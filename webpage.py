@@ -46,8 +46,7 @@ def single_image(search, url):
     width, height = img.size
     title = search
 
-    return render_template('single.html', url=url, mode=mode, imgFormat=imgForm$
-
+    return render_template('single.html', url=url, mode=mode, imgFormat=imgFormat, width=width, height=height,title=title)
 
 # runs the program wihout doing flask run....
 if __name__ == '__main__':
