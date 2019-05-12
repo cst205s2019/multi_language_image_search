@@ -4,11 +4,16 @@
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
+#for using unicode characters
+import urllib.parse
+
 #import this to be able to call ssl
 import ssl
 
 import os
 import re
+
+
 #makes class
 class imageSearch():
     #start and end are optional parameters
@@ -16,10 +21,10 @@ class imageSearch():
     def __init__(self, kw, save = '', start = -1, end = -1):
         self.link_list = []
         self.keyword = kw
-        self.site = f'https://www.google.com/search?tbm=isch&q={self.keyword}'
+        self.site = 'https://www.google.com/search?tbm=isch&q=' + str(urllib.parse.quote(kw))
         self.save = save
         self.declareSSL()
-        #checks to see if user entered range
+        # checks to see if user entered range
         if start >= 0 and end > 0:
             self.searchRange(start, end)
 
@@ -34,6 +39,7 @@ class imageSearch():
         req = Request(self.site, headers={'User-Agent': 'Chrome/11.0 (Windows NT 10.0; WOW64; rv:40.0) Gecko/20100101 Firefox/40.0'})
         # req = Request(self.site, headers={'User-Agent': 'Chrome'})
         resp = urlopen(req, context = self.ctx)
+
         self.bs_obj = BeautifulSoup(resp.read(), features='lxml')
         #writes to a file for troubleshooting
         if self.save == 'w':
@@ -44,11 +50,6 @@ class imageSearch():
             txt_file = open(f'HTML Scrape Pages/scrape.html', 'w')
             txt_file.write(self.bs_obj.prettify())
             txt_file.close()
-
-    #goes to next page during search
-    def nextPage(self):
-        self.site = f'https://www.google.com/search?tbm=isch&q={self.keyword}'
-        self.openSearch()
 
     #gets links to thumbnails and websites
     def getLinks(self):
