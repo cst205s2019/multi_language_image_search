@@ -1,12 +1,12 @@
 body {
-	background-color: white;
-	
+  background-color: white;
+  
 }
 
 h1 {
-	font-size: 4em; 
-	color: white;
-	text-align: center;
+  font-size: 4em; 
+  color: white;
+  text-align: center;
 }
 
 
@@ -15,8 +15,9 @@ input {
 }
 
 .header{
-	padding: 5px;
-	background: #C9C78B;
+  width: 100%;
+  padding: 5px;
+  background: #C9C78B;
 }
 
 .footer {
@@ -63,3 +64,31 @@ form {
   border: 1px solid #eaeaea;
   border-radius: 4px;
 }
+
+#textbox{
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 0;
+  background-color: #f1f1e2;
+  display: inline-block;
+  color: black;
+}
+
+.left {
+  float: left;
+  width:33.33333%;
+  text-align:left;
+}
+.center {
+  float: left;
+  width:33.33333%;
+  text-align:center;
+}
+.right {
+ float: left;
+ width:33.33333%;
+ text-align:right;
+}​

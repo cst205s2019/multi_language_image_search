@@ -3,31 +3,25 @@
 
 <head>
   <title>IMAGE</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
   <div class="header">
     <h1>Image Test</h1>
   </div>
+</div>
+    
+
+    <div id="textbox">
+        <p class="left"><strong>Search Phrase:</strong> {{text}} </p>
+        <p class="center"><strong>Language Chosen:</strong> {{lang1}}</p>
+        <p class="right"><strong>Translation Result:</strong> {{translated}}</p>
+    </div>
+<div style="clear: both;"></div>​
 
 
 
-  <p>
-    Search Phrase: {{text}}
-  </p>
-  <p>
-    Language Chosen: {{lang1}}
-  </p>
-
-  <p>
-    Translation Result: {{translated}}
-  </p>
-  <select name="Language">
-    <option selected="selected" value="secret">Language</option>
-    {% for l in Languages %}
-    <option value="{{ l[0] }}">{{ l[0] }}</option>
-    {% endfor %}
-  </select>
   <p>Images<p>
     <ul>
     {% for index in range(5) %}
