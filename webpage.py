@@ -32,7 +32,21 @@ def result():
         imageList = images.getLinkList()
     return render_template('results.html', text=text, lang1=lang1, translated=translated, Languages=Languages, imageList=imageList)
 
+@app.route("/<search>")
+def single_image(search, url):
+    image=urllib.URLopener()
+    image.retrieve(url, 'static/single_image')
+#generate the image path for url_for later
+    filename = url
+#the file is stored in a static folder, as id.jpg
+    img = Image.open(filename)
+#open the file to use pillow methods for properties
+    imgFormat = img.format
+    mode = img.mode
+    width, height = img.size
+    title = search
 
+    return render_template('single.html', url=url, mode=mode, imgFormat=imgForm$
 
 
 # runs the program wihout doing flask run....
