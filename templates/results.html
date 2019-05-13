@@ -2,15 +2,14 @@
 <html>
 
 <head>
-  <title>IMAGE</title>
+  <title>Image Results</title>
    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 </head>
 
 <body>
   <div class="header">
-    <h1>Image Test</h1>
+    <h1>Image Results</h1>
   </div>
-</div>
 
 <!-- div for the upper part of the image with results -->
     <div id="textbox">
@@ -22,13 +21,14 @@
 
 
 <input type="button" value="Back" id="submit" onclick="window.history.back()" />
-<br>
+<br></br><br></br>
+
 <!-- horizontal div with all results -->
-    <div style="align=center;width=90%;overflow-x: auto;white-space: nowrap">
+    <div style="margin: auto;overflow-x: auto;white-space: nowrap;">
     {% for image in imageList %}
-      <a href="{{url_for('single_image', search=search, url=url)}}"><img src="{{ image[0] }}" width = 19%></a>
+      <a href="{{url_for('single_image', search=search, url=url)}}"><img src="{{ image[0] }}" style="height:40vh;"></a>
     {% endfor %}
   </div>
-</body>
 
+  </body>
 </html>
