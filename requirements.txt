@@ -1,0 +1,49 @@
+Our project is somewhat simple to run, since it is a webpage. To get the page running, 
+there are a few modules which must be installed. These modules are the following: 
+
+beautifulsoup4==4.7.1
+bs4==0.0.1
+cachetools==3.1.0
+certifi==2019.3.9
+chardet==3.0.4
+Click==7.0
+Flask==1.0.2
+get==2019.4.13
+google-api-core==1.10.0
+google-auth==1.6.3
+google-cloud-core==0.29.1
+google-cloud-language==1.2.0
+google-cloud-translate==1.4.0
+googleapis-common-protos==1.5.10
+grpcio==1.20.1
+idna==2.8
+itsdangerous==1.1.0
+Jinja2==2.10.1
+lxml==4.3.3
+MarkupSafe==1.1.1
+post==2019.4.13
+protobuf==3.7.1
+public==2019.4.13
+pyasn1==0.4.5
+pyasn1-modules==0.2.5
+pytz==2019.1
+query-string==2019.4.13
+request==2019.4.13
+requests==2.21.0
+rsa==4.0
+six==1.12.0
+soupsieve==1.9.1
+urllib3==1.24.3
+Werkzeug==0.15.2
+WTForms==2.2.1
+
+On linux or mac, the following commands should install all required modules.
+pip3 install flask
+pip3 install wtforms
+pip3 install bs4
+pip3 install lxml
+pip3 install request
+pip3 install requests
+pip3 install urllib
+pip3 install --upgrade google-cloud-language
+pip3 install google-cloud-translate
