@@ -11,8 +11,8 @@
     <h1>Image Test</h1>
   </div>
 </div>
-    
 
+<!-- div for the upper part of the image with results -->
     <div id="textbox">
         <p class="left"><strong>Search Phrase:</strong> {{text}} </p>
         <p class="center"><strong>Language Chosen:</strong> {{lang1}}</p>
@@ -22,13 +22,13 @@
 
 
 <input type="button" value="Back" id="submit" onclick="window.history.back()" />
-  <p>Images<p>
-    <ul>
-    {% for index in range(5) %}
-    { set imageList[index][0] = "teeeee" }
-      <li><a href="{{url_for('single_image', search=search, url=url)}}"><img src="{{ imageList[index][0] }}" width = 400px></a></li>
+<br>
+<!-- horizontal div with all results -->
+    <div style="align=center;width=90%;overflow-x: auto;white-space: nowrap">
+    {% for image in imageList %}
+      <a href="{{url_for('single_image', search=search, url=url)}}"><img src="{{ image[0] }}" width = 19%></a>
     {% endfor %}
-  </ul>
+  </div>
 </body>
 
 </html>
